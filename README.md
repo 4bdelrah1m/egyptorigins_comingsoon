@@ -95,11 +95,27 @@ The page sends these events automatically:
 Test locally by watching the browser Network tab for `googletagmanager.com` and
 `clarity.ms` requests, and use GA4 **Admin → DebugView** if needed.
 
-## Waitlist storage
+## Waitlist storage & email notifications
 
 Signups are appended to `data/waitlist.json` (git-ignored) by
 `app/api/waitlist/route.ts`. Writes are serialized and atomic, and duplicates
 return the original position.
+
+**Every new signup also emails the owner.** `lib/waitlist-email.ts` posts to
+FormSubmit's keyless AJAX endpoint, so no API key or account is needed:
+
+```dotenv
+WAITLIST_NOTIFICATION_EMAIL=abdelrahim.nabil.hamad@gmail.com
+```
+
+> **One-time setup:** the first submission triggers a confirmation email from
+> FormSubmit to that inbox. Open it and click the confirmation link (check spam
+> too). Until that is done, notifications are not delivered — signups are still
+> saved locally and the visitor still sees success.
+
+Email delivery is best-effort: if FormSubmit is unreachable, the signup is kept
+and the visitor is not shown an error. Change the address above, or set the env
+var in `.env.local` / your host's dashboard, to send notifications elsewhere.
 
 ```bash
 cat data/waitlist.json          # see local signups

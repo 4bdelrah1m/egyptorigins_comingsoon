@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { notifyOwnerOfSignup } from "@/lib/waitlist-email";
 import { addToWaitlist } from "@/lib/waitlist-store";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -111,13 +112,26 @@ export async function POST(request: Request) {
     const result = await addToWaitlist({ email, source, campaign });
 
     if (!result.alreadyRegistered) {
-      await mirrorToWebhook({
-        event: "waitlist.signup",
+      const notification = {
         email,
         source,
         campaign,
         position: result.position,
         createdAt: new Date().toISOString(),
+      };
+
+      // Run after the response so a slow relay never delays the visitor.
+      // Delivery is best-effort: a broken relay must never lose a signup.
+      after(async () => {
+        await Promise.all([
+          mirrorToWebhook({
+            event: "waitlist.signup",
+            ...notification,
+          }),
+          notifyOwnerOfSignup(notification).catch((error) => {
+            console.error("waitlist owner email failed", error);
+          }),
+        ]);
       });
     }
 
