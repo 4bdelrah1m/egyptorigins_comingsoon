@@ -14,5 +14,5 @@ export const siteConfig = {
   launchLabel: process.env.NEXT_PUBLIC_LAUNCH_LABEL ?? "15 January 2027",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://egyptorigin.com",
   email: "hello@egyptorigin.com",
-  instagram: "https://instagram.com/egyptorigin",
+  instagram: "https://instagram.com/abdelrahim.nabil/",
 } as const;

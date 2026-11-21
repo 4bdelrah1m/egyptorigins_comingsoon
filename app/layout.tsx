@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   title: "Egypt Origin — Private Egypt Travel Atelier",
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  category: "Travel",
+  creator: siteConfig.name,
   keywords: [
     "Egypt travel",
     "private Egypt tours",

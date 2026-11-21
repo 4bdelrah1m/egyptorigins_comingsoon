@@ -31,7 +31,34 @@ npm run lint
 - Working waitlist form: validation, loading/success states, honeypot,
   per-IP rate limiting, duplicate detection, and join-position feedback.
 - GA4 + Microsoft Clarity, env-gated and loaded without blocking the hero.
-- SEO metadata, Open Graph/Twitter cards, JSON-LD, and a custom SVG favicon.
+- Full SEO setup: metadata, canonical URL, Open Graph/Twitter cards, JSON-LD
+  `TravelAgency` schema, `robots.txt`, `sitemap.xml`, and a logo-derived favicon.
+
+## SEO
+
+All search/social settings are centralized and ready to go:
+
+| What | Where | Notes |
+| --- | --- | --- |
+| Title, description, keywords, canonical | `app/layout.tsx` (`metadata`) | Canonical resolves against `metadataBase`. |
+| Open Graph + Twitter cards | `app/layout.tsx` | Uses `public/images/og-giza.webp` (1200×630). |
+| Structured data (`TravelAgency`) | `app/page.tsx` (`structuredData`) | Includes the logo and social-card image URLs. |
+| Crawler rules | `app/robots.ts` → `/robots.txt` | Allows `/`, disallows `/api/`, points to the sitemap. |
+| Sitemap | `app/sitemap.ts` → `/sitemap.xml` | Single homepage entry. |
+| Favicon | `app/icon.png` | Cropped monogram from the logo (Next serves `/icon.png`). |
+
+Set the production domain **once** in `lib/site.ts` (`url`) or via
+`NEXT_PUBLIC_SITE_URL` in `.env.local`. Every absolute URL above — canonical,
+social card, JSON-LD, robots, sitemap — is derived from it.
+
+## Logo & images
+
+- `public/images/logo.png` — the supplied Egypt Origin lockup. It is used in the
+  header, the JSON-LD `logo` field, and (inverted) on the social card.
+- `app/icon.png` — favicon generated from a crop of the same logo.
+- `public/images/og-giza.webp` — 1200×630 social card combining the inverted logo
+  with the Giza photograph.
+- `public/images/hero-pyramids.webp` — the field photograph shown in the page plate.
 
 ## Google Analytics + Microsoft Clarity
 
@@ -89,7 +116,10 @@ local file remains a best-effort cache. UTM parameters (`utm_source`,
 - **Copy & launch date:** `app/page.tsx`, `lib/site.ts`, `.env.local`.
 - **Palette:** paper/ink variables at the top of `app/globals.css`.
 - **Fonts:** Archivo + IBM Plex Mono in `app/layout.tsx`.
+- **Domain / SEO URLs:** `siteConfig.url` in `lib/site.ts` (or `NEXT_PUBLIC_SITE_URL`).
 - **Social/email links:** `siteConfig` in `lib/site.ts`.
+- **Logo:** `public/images/logo.png` (header + JSON-LD); regenerate `app/icon.png`
+  from it if you replace it.
 - **Field photograph:** replace `public/images/hero-pyramids.webp` (keep the same name).
 - **Social card:** replace `public/images/og-giza.webp` (1200×630).
 
