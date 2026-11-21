@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   EGYPT ORIGIN — monochrome print
+   Limestone paper, black ink, hairline rules. No gradients, no glow.
+   ───────────────────────────────────────────────────────────────────────────── */
+:root {
+  --paper: #f3f1ea;
+  --paper-deep: #e8e5dc;
+  --ink: #141412;
+  --ysa: #ffff56;
+}
+
+@theme inline {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--paper);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--ink) 22%, var(--paper));
+    border: 2px solid var(--paper);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--ink) 45%, var(--paper));
+  }
+}
+
+/* Small technical caption: monospace, spaced, uppercase. */
+@utility label {
+  font-family: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@keyframes spin-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-ring {
+  animation: spin-ring 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .spin-ring {
+    animation-duration: 2.4s;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
