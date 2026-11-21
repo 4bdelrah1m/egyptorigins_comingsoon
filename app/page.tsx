@@ -129,27 +129,6 @@ export default function Home() {
               <IconArrowUpRight className="h-6 w-6 font-bold transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
-
-          <p className="label mt-2 text-[9px] leading-relaxed text-ink/60">
-            Photograph —{" "}
-            <a
-              href="https://commons.wikimedia.org/wiki/File:Sunset_at_the_Pyramids.jpg"
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-ink/25 underline-offset-2 transition-colors hover:text-ink/80"
-            >
-              Spottedviper
-            </a>{" "}
-            /{" "}
-            <a
-              href="https://creativecommons.org/licenses/by-sa/4.0/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-ink/25 underline-offset-2 transition-colors hover:text-ink/80"
-            >
-              CC BY-SA 4.0
-            </a>
-          </p>
         </footer>
       </div>
 
