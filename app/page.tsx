@@ -26,22 +26,21 @@ export default function Home() {
     <main className="min-h-svh bg-paper text-ink">
       <div className="mx-auto flex min-h-svh w-full max-w-6xl flex-col px-5 sm:px-8 lg:px-10">
         {/* ── Header ─────────────────────────────────────────────────────── */}
-        <header className="flex h-16 shrink-0 items-center justify-between border-b border-ink/15 sm:h-20">
+        <header className="flex h-20 shrink-0 items-center justify-between border-b border-ink/15 sm:h-24">
           <Link
             href="/"
             aria-label="Egypt Origin — home"
-            className="flex items-center gap-3"
+            className="flex items-center"
           >
             <Image
               src="/images/logo.png"
-              alt=""
-              width={180}
-              height={72}
+              alt="Egypt Origin"
+              width={300}
+              height={300}
               preload
-              sizes="(min-width: 640px) 180px, 140px"
-              className="h-8 w-auto object-cover object-center mix-blend-multiply invert sm:h-10"
+              sizes="(min-width: 640px) 148px, 104px"
+              className="h-10 w-[104px] object-cover object-center mix-blend-multiply invert sm:h-14 sm:w-[148px]"
             />
-            <span className="label text-[10px] font-medium">Egypt Origin</span>
           </Link>
 
           <div className="flex items-center gap-6">
